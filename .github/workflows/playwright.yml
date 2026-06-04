@@ -6,12 +6,16 @@ on:
   pull_request:
     branches: [main]
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true  
+
 jobs:
   test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         browser: [chromium, firefox, webkit]
+      fail-fast: false
 
     steps:
       - name: Checkout repository
@@ -46,7 +50,6 @@ jobs:
         with:
           name: test-results-${{ matrix.browser }}
           path: test-results
-
 
   email_notification:
     runs-on: ubuntu-latest

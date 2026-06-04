@@ -1,19 +1,31 @@
 {
   "name": "jenkins_with_playwright",
   "version": "1.0.0",
-  "description": "",
+  "description": "Playwright automation framework integrated with Jenkins",
   "main": "index.js",
+  "type": "commonjs",
   "scripts": {
+    "prepare": "npx playwright install --with-deps",
     "test": "npx playwright test",
     "test:headed": "npx playwright test --headed",
-    "report:generate": "allure generate reports/allure-results --clean -o reports/allure-report",
-    "report:open": "allure open reports/allure-report"
+    "test:ui": "npx playwright test --ui",
+    "test:debug": "npx playwright test --debug",
+    "install:browsers": "npx playwright install --with-deps",
+    "report": "npx playwright show-report",
+    "clean:reports": "rimraf playwright-report test-results",
+    "ci:test": "npx playwright test --reporter=html",
+    "jenkins:test": "npx playwright test --reporter=html,junit"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
   "devDependencies": {
-    "@playwright/test": "^1.60.0"
-  }
+    "@playwright/test": "^1.60.0",
+    "rimraf": "^5.0.0"
+  },
+  "keywords": [
+    "playwright",
+    "automation",
+    "jenkins",
+    "CI/CD"
+  ],
+  "author": "",
+  "license": "ISC"
 }

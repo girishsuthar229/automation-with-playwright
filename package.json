@@ -12,7 +12,7 @@
     "test:debug": "npx playwright test --debug",
     "install:browsers": "npx playwright install --with-deps",
     "report": "npx playwright show-report",
-    "clean:reports": "rimraf reports/html test-results",
+    "clean:reports": "rimraf reports test-results",
     "ci:test": "npx playwright test --reporter=html",
     "jenkins:test": "npx playwright test --reporter=html,junit"
   },

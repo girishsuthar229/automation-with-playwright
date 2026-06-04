@@ -6,7 +6,8 @@
   "scripts": {
     "test": "npx playwright test",
     "test:headed": "npx playwright test --headed",
-    "test:report": "npx playwright show-report"
+    "report:generate": "allure generate reports/allure-results --clean -o reports/allure-report",
+    "report:open": "allure open reports/allure-report"
   },
   "keywords": [],
   "author": "",

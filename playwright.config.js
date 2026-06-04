@@ -6,7 +6,7 @@ module.exports = defineConfig({
   retries: process.env.CI ? 2 : 1,
   reporter: [
     ['html', {
-      outputFolder: 'reports/html',
+      outputFolder: 'playwright-report',
       open: 'never',
       embedScreenshots: true,
       embedVideos: true
@@ -24,6 +24,5 @@ module.exports = defineConfig({
   },
   projects: [
     { name: 'Desktop Chrome', use: { ...devices['Desktop Chrome'] } },
-    // { name: 'Desktop Firefox', use: { ...devices['Desktop Firefox'] } },
   ],
 });

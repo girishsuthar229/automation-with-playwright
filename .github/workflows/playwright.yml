@@ -34,22 +34,29 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run Playwright tests
-        run: npx playwright test --browser ${{ matrix.browser }} --reporter=html,junit --output=test-results
+        run: npx playwright test --project=chromium
         continue-on-error: true
 
-      - name: Upload HTML Report
+      - name: Upload HTML Report (artifact)
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: playwright-html-report
-          path: reports/html
+          path: playwright-report
 
       - name: Upload Test Results
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: test-results-${{ matrix.browser }}
+          name: test-results
           path: test-results
+
+      - name: Deploy HTML Report to GitHub Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: playwright-report
 
   email_notification:
     runs-on: ubuntu-latest
@@ -67,15 +74,13 @@ jobs:
           to: nikkbhai9090@gmail.com
           from: CI Bot <girishstudy124@gmail.com>
           body: |
-            Hello,
+            Playwright Test Execution Completed
 
-            Playwright tests have completed.
+            📊 Full Test Report (PASS + FAIL + SKIP):
+            https://girishsuthar229.github.io/automation-with-playwright/
 
             Commit: ${{ github.sha }}
             Branch: ${{ github.ref_name }}
-
-            View full workflow run and download reports here:
-            https://github.com/girishsuthar229/automation-with-playwright/actions/runs/${{ github.run_id }}
 
             Regards,
             CI Bot

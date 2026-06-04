@@ -75,8 +75,8 @@ jobs:
           username: ${{ secrets.EMAIL_USERNAME }}
           password: ${{ secrets.EMAIL_PASSWORD }}
           subject: "Playwright CI - Commit Test Results"
-          to: nikkbhai9090@gmail.com
-          from: CI Bot <girishstudy124@gmail.com>
+          to: ${{ vars.TO_EMAIL }}
+          from: CI Bot <${{ vars.FROM_EMAIL }}>
           body: |
             Playwright Test Execution Completed
 

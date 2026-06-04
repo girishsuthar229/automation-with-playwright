@@ -6,7 +6,7 @@ module.exports = defineConfig({
   retries: process.env.CI ? 2 : 1,
   reporter: [
     ['html', {
-      outputFolder: 'playwright-report',
+      outputFolder: 'reports/html',
       open: 'never',
       embedScreenshots: true,
       embedVideos: true

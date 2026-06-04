@@ -38,7 +38,7 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run Playwright tests
-        run: npx playwright test --project=chromium
+        run: npx playwright test --project="Desktop Chrome"
         continue-on-error: true
 
       - name: Upload HTML Report (artifact)

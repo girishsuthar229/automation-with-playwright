@@ -1,18 +1,21 @@
-import { defineConfig } from '@playwright/test';
+// playwright.config.js
+const { defineConfig, devices } = require('@playwright/test');
 
-export default defineConfig({
+module.exports = defineConfig({
   testDir: './tests',
-  timeout: 30000,
+  timeout: 30 * 1000,
   retries: 1,
+  reporter: [['html', { outputFolder: 'reports/html', open: 'never' }], ['list']],
   use: {
-    browserName: 'chromium',
     headless: true,
+    viewport: { width: 1280, height: 720 },
+    ignoreHTTPSErrors: true,
+    video: 'on-first-retry',
     screenshot: 'only-on-failure',
-    video: 'retain-on-failure',
-    trace: 'on-first-retry',
+    baseURL: process.env.BASE_URL || 'https://example.com',
   },
-  reporter: [
-    ['list'],
-    ['html', { open: 'never' }]
+  projects: [
+    { name: 'Desktop Chrome', use: { ...devices['Desktop Chrome'] } },
+    // { name: 'Desktop Firefox', use: { ...devices['Desktop Firefox'] } },
   ],
 });
